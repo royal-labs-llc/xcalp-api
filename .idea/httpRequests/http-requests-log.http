@@ -1,0 +1,28 @@
+DELETE http://localhost:3000/api/events/636fbd45417e5cf3b0b1e838
+
+<> 2022-11-12T233748.200.json
+
+###
+
+GET http://localhost:3000/api/events
+Content-Type: application/json
+
+<> 2022-11-12T233606.200.json
+
+###
+
+POST http://localhost:3000/api/events
+Content-Type: application/json
+
+{
+  "contractAddress": "contractAddress",
+  "eventDateTime": 12345,
+  "eventDescription": "eventDescription",
+  "eventLocation": "eventLocation",
+  "eventName": "eventName"
+}
+
+<> 2022-11-12T233533.201.json
+
+###
+
