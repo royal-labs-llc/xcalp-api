@@ -1,0 +1,33 @@
+version: '3'
+services:
+  xcalp-api:
+    build: .
+    volumes:
+      - ./.env:/app/.env
+    labels:
+      - "traefik.enable=true"
+      ## replace `service-name` with the name of your docker container, you will need to replace this entry in all lines
+      - "traefik.http.routers.xcalp-api.entrypoints=http"
+      ## replace `example.domain.tld` with your own domain name, for example `wordpress.domain.ch`
+      - "traefik.http.routers.xcalp-api.rule=Host(`xcalp-api.w3bmint.xyz`)"
+      - "traefik.http.middlewares.xcalp-api-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.xcalp-api.middlewares=xcalp-api-https-redirect"
+      - "traefik.http.routers.xcalp-api-secure.entrypoints=https"
+      ## replace `example.domain.tld` with your own domain name, for example `wordpress.domain.ch`
+      - "traefik.http.routers.xcalp-api-secure.rule=Host(`xcalp-api.w3bmint.xyz`)"
+      - "traefik.http.routers.xcalp-api-secure.tls=true"
+      - "traefik.http.routers.xcalp-api-secure.tls.certresolver=http"
+      ## replace `w3bmint-api` with the name of your docker container
+      - "traefik.http.routers.xcalp-api-secure.service=xcalp-api"
+      ## if your container is using a different port then `80`, just replace this port with your custom one, for example: `8888`
+      - "traefik.http.services.xcalp-api.loadbalancer.server.port=3000"
+      - "traefik.docker.network=proxy"
+    restart: unless-stopped  
+    networks:
+      - proxy
+    container_name: xcalp-api
+    ports:
+      - '3000:3000'
+networks:
+  proxy:
+    external: true
