@@ -20,7 +20,7 @@ services:
       ## replace `w3bmint-api` with the name of your docker container
       - "traefik.http.routers.xcalp-api-secure.service=xcalp-api"
       ## if your container is using a different port then `80`, just replace this port with your custom one, for example: `8888`
-      - "traefik.http.services.xcalp-api.loadbalancer.server.port=3003"
+      - "traefik.http.services.xcalp-api.loadbalancer.server.port=3000"
       - "traefik.docker.network=proxy"
     restart: unless-stopped  
     networks:
