@@ -3,6 +3,8 @@ import {MongooseModule} from '@nestjs/mongoose'
 import {ConfigModule, ConfigService} from '@nestjs/config'
 import {EventsProvider} from '../../models/event'
 import {EventsMongoDBService} from './services/events.service'
+import {MessagesMongoDBService} from './services/message.service'
+import {MessagesProvider} from '../../models/message'
 
 @Global()
 @Module({
@@ -16,10 +18,11 @@ import {EventsMongoDBService} from './services/events.service'
             inject: [ConfigService]
         }),
         MongooseModule.forFeature([
-            EventsProvider
+            EventsProvider,
+            MessagesProvider
         ]),
     ],
-    providers: [EventsMongoDBService],
-    exports: [EventsMongoDBService],
+    providers: [EventsMongoDBService, MessagesMongoDBService],
+    exports: [EventsMongoDBService, MessagesMongoDBService],
 })
 export class MongodbModule {}

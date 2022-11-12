@@ -25,6 +25,6 @@ export class EventsMongoDBService {
     }
 
     getEvents() {
-        return this.document.find()
+        return this.document.find().exec()
     }
 }

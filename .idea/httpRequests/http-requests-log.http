@@ -1,3 +1,93 @@
+GET http://localhost:3000/api/events
+Content-Type: application/json
+
+<> 2022-11-13T020344.200.json
+
+###
+
+GET http://localhost:3000/api/events
+Content-Type: application/json
+
+<> 2022-11-13T020337.200.json
+
+###
+
+GET http://localhost:3000/api/events
+Content-Type: application/json
+
+###
+
+GET http://localhost:3000/api/events
+Content-Type: application/json
+
+<> 2022-11-13T014439.200.json
+
+###
+
+GET http://localhost:3000/api/events
+Content-Type: application/json
+
+<> 2022-11-13T014407.200.json
+
+###
+
+GET http://localhost:3000/api/events
+Content-Type: application/json
+
+<> 2022-11-13T014332.200.json
+
+###
+
+GET http://localhost:3000/api/events
+Content-Type: application/json
+
+<> 2022-11-13T014303.500.json
+
+###
+
+GET http://localhost:3000/api/events
+Content-Type: application/json
+
+<> 2022-11-13T013841.500.json
+
+###
+
+GET http://localhost:3000/api/events
+Content-Type: application/json
+
+<> 2022-11-13T013802.500.json
+
+###
+
+GET http://localhost:3000/api/events
+Content-Type: application/json
+
+<> 2022-11-13T013717.500.json
+
+###
+
+POST http://localhost:3000/api/events
+Content-Type: application/json
+
+{
+  "contractAddress": "contractAddress",
+  "eventDateTime": 12345,
+  "eventDescription": "eventDescription",
+  "eventLocation": "eventLocation",
+  "eventName": "eventName"
+}
+
+<> 2022-11-13T004727.201.json
+
+###
+
+GET http://localhost:3000/api/events
+Content-Type: application/json
+
+<> 2022-11-12T233752.200.json
+
+###
+
 DELETE http://localhost:3000/api/events/636fbd45417e5cf3b0b1e838
 
 <> 2022-11-12T233748.200.json
