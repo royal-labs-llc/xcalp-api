@@ -1,9 +1,9 @@
 import {
-    MessageBody,
+    MessageBody, OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit,
     SubscribeMessage,
     WebSocketGateway,
     WebSocketServer,
-    WsResponse,
+    WsResponse
 } from '@nestjs/websockets';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -15,12 +15,35 @@ import {Messages} from '../models/message'
         origin: '*',
     },
 })
-export class MessageGateway {
+export class MessageGateway implements OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit  {
     @WebSocketServer()
     server: Server;
+    wsClients=[];
 
     @SubscribeMessage('send-message')
-    sendMessage(@MessageBody() data: any): Observable<WsResponse<Messages>> {
-        return from([1]).pipe(map(item => ({ event: 'events', data: data } )));
+    sendMessage(@MessageBody() data: any) {
+        console.log(data, this.wsClients)
+        this.broadcast('receive-message', data)
+    }
+    afterInit() {
+    }
+
+    handleConnection(client: any) {
+        this.wsClients.push(client);
+    }
+
+    handleDisconnect(client) {
+        for (let i = 0; i < this.wsClients.length; i++) {
+            if (this.wsClients[i] === client) {
+                this.wsClients.splice(i, 1);
+                break;
+            }
+        }
+        this.broadcast('disconnect',{});
+    }
+    private broadcast(event, message: any) {
+        for (let c of this.wsClients) {
+            c.emit(event, message);
+        }
     }
 }
