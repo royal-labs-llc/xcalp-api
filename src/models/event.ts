@@ -31,6 +31,10 @@ export class Events implements IEvents {
     @Prop()
     @IsString()
     eventName: string
+
+    @Prop()
+    @IsString({ each: true })
+    claimedPasses: string[]
 }
 
 @Schema(SchemaConstants)

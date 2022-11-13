@@ -16,13 +16,13 @@ import {Messages} from '../models/message'
     },
 })
 export class MessageGateway implements OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit  {
+    constructor() {}
     @WebSocketServer()
     server: Server;
     wsClients=[];
 
     @SubscribeMessage('send-message')
     sendMessage(@MessageBody() data: any) {
-        console.log(data, this.wsClients)
         this.broadcast('receive-message', data)
     }
     afterInit() {

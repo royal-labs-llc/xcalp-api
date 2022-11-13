@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Param, Post} from '@nestjs/common'
+import {Body, Controller, Delete, Get, Param, Post, Query} from '@nestjs/common'
 import {EventsService} from './events.service'
 import {Events} from '../../models/event'
 
@@ -14,6 +14,11 @@ export class EventsController {
     @Get()
     getEvents() {
         return this.eventsService.getEvents()
+    }
+
+    @Post('register/:pass')
+    registerPass(@Param('pass') pass: string, @Query('address') address: string) {
+        return this.eventsService.registerPass(pass)
     }
 
     @Delete(':id')

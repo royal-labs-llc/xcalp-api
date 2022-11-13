@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common'
+import {BadRequestException, Injectable} from '@nestjs/common'
 import {EventsMongoDBService} from '../../storage/mongodb/services/events.service'
 import {Events} from '../../models/event'
 import {HttpService} from '@nestjs/axios'
@@ -43,4 +43,21 @@ export class EventsService {
   deleteEventById(id: string): any {
     return this.eventsMongoDBService.deleteById(id)
   }
+
+    async registerPass(pass: string) {
+      try {
+        await this.httpService.put(
+            this.configService.get('WEBMINT_API') +
+            `/tokens/${pass}?api_key=` +
+            this.configService.get('WEBMINT_API_KEY'), {
+              add: [{
+                trait_type: 'Claimed',
+                value: 'YES'
+              }]
+            })
+        return this.eventsMongoDBService.registerPass(pass)
+      }catch(ex) {
+        throw new BadRequestException()
+      }
+    }
 }

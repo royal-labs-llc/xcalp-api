@@ -8,7 +8,7 @@ import {MessagesProvider} from '../../models/message'
 
 @Global()
 @Module({
-    imports: [
+    imports: [k
         MongooseModule.forRootAsync({
             imports: [ConfigModule],
             useFactory: (config: ConfigService) => ({
