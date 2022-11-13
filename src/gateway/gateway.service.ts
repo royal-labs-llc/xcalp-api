@@ -23,6 +23,8 @@ export class MessageGateway implements OnGatewayConnection, OnGatewayDisconnect,
 
     @SubscribeMessage('send-message')
     sendMessage(@MessageBody() data: any) {
+        // TODO: create bidirectional hashing using cryptojs
+        // broadcast to affected room
         this.broadcast('receive-message', data)
     }
     afterInit() {
